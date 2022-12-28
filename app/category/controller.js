@@ -8,7 +8,7 @@ const store = async (req, res, next) => {
     const category = new Category(payload);
     await category.save();
     res.status(201).json({
-      data: result,
+      data: category,
     });
   } catch (error) {
     errorValidation(error, res, next);
