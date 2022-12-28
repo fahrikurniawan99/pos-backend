@@ -49,7 +49,7 @@ const store = async (req, res, next) => {
         try {
           const product = new Product({
             ...payload,
-            image_url: `https://panicky-rose-chiton.cyclic.app/images/products/${name}`,
+            image_url: `https://eduwork-pos.cyclic.app/images/products/${name}`,
           });
           await product.save();
           res.status(201).json({ data: product });
