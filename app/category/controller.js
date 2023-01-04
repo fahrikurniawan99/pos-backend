@@ -27,6 +27,7 @@ const index = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const payload = req.body;
+    
     const result = await Category.findByIdAndUpdate(req.params.id, payload, {
       new: true,
       runValidators: true,

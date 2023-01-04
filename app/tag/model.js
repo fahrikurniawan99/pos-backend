@@ -5,7 +5,7 @@ const tagSchema = Schema({
     type: String,
     minlength: [3, "panjang nama minimal 3 karakter"],
     maxlength: [20, "panjang nama maksimal 20 karakter"],
-    required: [true, "kategori tidak boleh kosong"],
+    required: [true, "tag tidak boleh kosong"],
   },
   category: {
     type: Schema.Types.ObjectId,

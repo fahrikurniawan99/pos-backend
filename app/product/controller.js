@@ -49,7 +49,7 @@ const store = async (req, res, next) => {
         try {
           const product = new Product({
             ...payload,
-            image_url: `https://eduwork-pos.cyclic.app/images/products/${name}`,
+            image_url: `http://localhost:4000/images/products/${name}`,
           });
           await product.save();
           res.status(201).json({ data: product });
@@ -131,7 +131,7 @@ const update = async (req, res, next) => {
     let payload = req.body;
 
     if (payload.category) {
-      const category = await Category.find({
+      const category = await Category.findOne({
         name: { $regex: payload.category, $options: "i" },
       });
       if (category) {
@@ -174,7 +174,7 @@ const update = async (req, res, next) => {
           }
           const product = {
             ...payload,
-            image_url: name,
+            image_url: `http://localhost:4000/images/products/${name}`,
           };
           const result = await Product.findByIdAndUpdate(
             req.params.id,
