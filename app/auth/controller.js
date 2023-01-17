@@ -7,9 +7,13 @@ const { getToken } = require("../../utils");
 
 const errorValidation = (error, res, next) => {
   if (error && error.name === "ValidationError") {
-    res
-      .status(500)
-      .json({ error: 1, message: error.message, fields: error.errors });
+    res.status(500).json({
+      error: 1,
+      message: Object.values(error.errors)
+        .map((item) => item.message)
+        .join(", "),
+      fields: error.errors,
+    });
   } else {
     next(error);
   }
@@ -43,10 +47,6 @@ const localStrategy = async (email, password, done) => {
 };
 
 const login = (req, res, next) => {
-  //   passport.authenticate("local", (error, user) => {
-  //     if (error) return res.json(error);
-  //     res.json({ user, body: req.body });
-  //   })(req, res, next);
   passport.authenticate("local", async (err, user) => {
     if (err) return next(err);
     if (!user) {
@@ -61,6 +61,7 @@ const login = (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
+  console.log(req.headers);
   const token = getToken(req);
   const user = await User.findOneAndUpdate(
     { token: { $in: [token] } },

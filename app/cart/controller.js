@@ -33,8 +33,6 @@ const update = async (req, res, next) => {
     });
 
     await CartItem.deleteMany({ user: req.user._id });
-    console.log(req.user._id);
-    console.log("deleteMany");
 
     await CartItem.bulkWrite(
       cartItems.map((item) => {
@@ -50,7 +48,6 @@ const update = async (req, res, next) => {
         };
       })
     );
-    console.log("write");
 
     return res.status(200).json({ data: cartItems });
   } catch (error) {
@@ -64,7 +61,9 @@ const index = async (req, res, next) => {
       "product"
     );
     return res.status(200).json({ data: items });
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = { index, update };

@@ -30,7 +30,7 @@ const decodeToken = () => {
 // middleware untuk cek hak askes
 function police_check(action, subject) {
   return function (req, res, next) {
-    const policy = policyFor(req.user);
+    const policy = policyFor(req.user);    
     if (!policy.can(action, subject)) {
       return res.status(500).json({
         error: 1,
