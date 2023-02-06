@@ -39,6 +39,7 @@ const store = async (req, res, next) => {
         kelurahan: address.kelurahan,
         detail: address.detail,
       },
+      status: "delivered",
       user: req.user._id,
     });
 

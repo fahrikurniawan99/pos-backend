@@ -4,7 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
-const { decodeToken } = require("./middlewares");
 const productsRouter = require("./app/product/routes");
 const categoryRouter = require("./app/category/routes");
 const tagsRouter = require("./app/tag/routes");
@@ -26,7 +25,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(decodeToken());
 
 app.use("/auth", authRouter);
 app.use("/api", productsRouter);

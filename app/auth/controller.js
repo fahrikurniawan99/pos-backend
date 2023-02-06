@@ -61,7 +61,6 @@ const login = (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
-  console.log(req.headers);
   const token = getToken(req);
   const user = await User.findOneAndUpdate(
     { token: { $in: [token] } },

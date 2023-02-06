@@ -54,6 +54,7 @@ orderSchema.pre("save", async function () {
     delivery_fee: parseInt(this.delivery_fee),
     total: parseInt(this.delivery_fee + sub_total),
     delivery_address: this.delivery_address,
+    payment_status: "paid",
   });
   await invoice.save();
 });
