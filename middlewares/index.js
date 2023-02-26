@@ -1,6 +1,6 @@
 const { getToken, policyFor } = require("../utils/index");
 const jwt = require("jsonwebtoken");
-const config = require("../app/config");
+const { secretKey } = require("../app/config");
 const User = require("../app/user/model");
 
 const decodeToken = () => {
@@ -9,7 +9,7 @@ const decodeToken = () => {
       const token = getToken(req);
       if (!token) return next();
 
-      req.user = jwt.verify(token, "fahri");
+      req.user = jwt.verify(token, secretKey);
 
       const user = await User.findOne({ token: { $in: [token] } });
 

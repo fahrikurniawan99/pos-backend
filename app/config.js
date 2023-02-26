@@ -4,5 +4,5 @@ dotenv.config();
 
 module.exports = {
   rootPath: path.resolve(__dirname, ".."),
-  secretKey: "fahri",
+  secretKey: process.env.SECRET_KEY,
 };
