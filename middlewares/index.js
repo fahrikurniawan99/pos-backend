@@ -9,9 +9,8 @@ const decodeToken = () => {
       const token = getToken(req);
       if (!token) return next();
 
-      req.user = jwt.verify(token, config.secretKey);
-      console.log(token);
-      console.log(config.secretKey);
+      req.user = jwt.verify(token, "fahri");
+
       const user = await User.findOne({ token: { $in: [token] } });
 
       if (!user) {
